@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
+/*
+ * East End Mandarin — design tokens
+ * Warm, premium palette: cream background, deep warm charcoal text, a single
+ * refined jade accent, a warm-sand alternate surface, and white cards.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #f7f4ed; /* page background — warm off-white */
+  --sand: #efeae0; /* alternate-section surface */
+  --charcoal: #2a2a28; /* primary text */
+  --charcoal-soft: #615e58; /* secondary text */
+  --jade: #2e6b52; /* accent */
+  --jade-deep: #234e3c; /* accent, hover/active */
+  --jade-soft: #e6efe9; /* accent tint — chips, icon surfaces */
+  --line: #e7e0d3; /* hairline borders */
+  --line-strong: #d9d1c2; /* control borders */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-soft: var(--charcoal-soft);
+  --color-jade: var(--jade);
+  --color-jade-deep: var(--jade-deep);
+  --color-jade-soft: var(--jade-soft);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
+    serif;
+  /* Logo-only: editorial wordmark + the 文 mark (with CJK serif fallbacks). */
+  --font-cormorant: var(--font-cormorant-garamond), ui-serif, Georgia, serif;
+  --font-noto: var(--font-noto-serif-sc), "Noto Serif SC", "Songti SC",
+    "STSong", "SimSun", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Strong custom easing — the built-in CSS curves are too weak. Overriding the
+   default --ease-* theme keys upgrades every `ease-out` / `ease-in-out`
+   utility across the app. (Must be a non-inline @theme block to override.) */
+@theme {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* offset for the sticky nav when jumping to anchors */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-weight: 500;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--jade);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--jade-soft);
+    color: var(--jade-deep);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Respect users who prefer reduced motion — disable transforms + transitions */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

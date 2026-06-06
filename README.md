@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# East End Mandarin
 
-## Getting Started
+Marketing site for **East End Mandarin** — the Mandarin tutoring practice of **Spencer Gordon**, who reached near-native fluency in the U.S. and now teaches kids and teens to actually speak.
 
-First, run the development server:
+A warm, single-page experience for students and parents: an editorial wordmark logo, confident Fraunces/Inter typography, restrained jade accents, tasteful scroll-reveal motion, and a working contact form. Built mobile-first, accessible, and clean enough to read as a portfolio piece.
+
+---
+
+## Tech stack
+
+| Area      | Choice                                                                 |
+| --------- | ---------------------------------------------------------------------- |
+| Framework | [Next.js 16](https://nextjs.org) (App Router)                          |
+| Language  | TypeScript                                                             |
+| Styling   | [Tailwind CSS v4](https://tailwindcss.com)                             |
+| Fonts     | [Fraunces](https://fonts.google.com/specimen/Fraunces) + [Inter](https://fonts.google.com/specimen/Inter); [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) + [Noto Serif SC](https://fonts.google.com/noto/specimen/Noto+Serif+SC) for the logo — all via `next/font` |
+| Motion    | [Framer Motion](https://www.framer.com/motion/)                        |
+| Forms     | [Web3Forms](https://web3forms.com) (no backend)                        |
+| Tooling   | ESLint (flat config), Turbopack                                        |
+
+---
+
+## Design system
+
+- **Palette:** cream `#F7F4ED` background, charcoal `#2A2A28` text, refined jade `#2E6B52` accent (used sparingly), warm sand `#EFEAE0` alternate surface, white cards.
+- **Type:** Fraunces for headings, Inter for body/UI, on a deliberate scale with generous line-height.
+- **Logo:** an "editorial wordmark" built in [`src/components/Logo.tsx`](src/components/Logo.tsx) — "EAST END / MANDARIN" in tracked Cormorant Garamond caps, a jade 文 (Noto Serif SC) between hairline rules, and a "Mandarin Tutoring" tagline. Stacked, compact (nav), and icon (jade 文 in a hairline circle → favicon) variants.
+- **Motion (per [Emil Kowalski's](https://animations.dev) principles):** ~240ms scroll reveals, a strong custom `ease-out`, refined hover/press states, and full `prefers-reduced-motion` support.
+
+---
+
+## Project structure
+
+```
+src/
+  content.ts            # ← all editable copy, nav, services, location data
+  app/
+    layout.tsx          # fonts, metadata, OG/Twitter tags, Nav + Footer shell
+    page.tsx            # section composition
+    globals.css         # design tokens (palette, fonts, easing)
+    icon.svg            # favicon (jade 文 in a hairline circle)
+    opengraph-image.tsx # generated OG image (editorial wordmark)
+    twitter-image.tsx
+  components/
+    Logo, Nav, Hero, Background, Services, Location,
+    Contact, ContactForm, Footer, Section, Reveal, ui
+```
+
+**All editable copy lives in [`src/content.ts`](src/content.ts)** — revise wording, nav items, services, and location data there without touching components. Search that file for `CONFIRM` to find anything to verify before launch.
+
+---
+
+## Getting started
+
+### Prerequisites
+
+- **Node.js 20.9+** (required by Next.js 16)
+- npm
+
+### Install & configure
+
+```bash
+npm install
+cp .env.example .env.local
+```
+
+Add your Web3Forms key to `.env.local` so the contact form can send mail:
+
+```bash
+NEXT_PUBLIC_FORM_ACCESS_KEY=your-web3forms-access-key
+```
+
+Get a free key at [web3forms.com](https://web3forms.com) using the address where you want to receive inquiries. The form submits from the browser, so the key must be public — Web3Forms keys are designed for this, and Next.js only exposes vars prefixed with `NEXT_PUBLIC_`.
+
+### Run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open **[http://localhost:3000](http://localhost:3000)**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script          | Description                |
+| --------------- | -------------------------- |
+| `npm run dev`   | Local dev server           |
+| `npm run build` | Production build           |
+| `npm run start` | Serve the production build |
+| `npm run lint`  | Run ESLint                 |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Design: no photography
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The site is intentionally type-first — there are no photographs and no image placeholders. Where a photo might sit (the hero), the design uses an oversized, low-contrast 中文 composition on a warm sand panel, echoing the logo — nothing looks unfinished. To add a real headshot later, drop a square/portrait image in `public/` and set `hero.portraitSrc` in `src/content.ts`; it replaces the 中文 art with no other changes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Deploys cleanly to [Vercel](https://vercel.com):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push to GitHub and import the project in Vercel.
+2. Add the `NEXT_PUBLIC_FORM_ACCESS_KEY` environment variable.
+3. Set `SITE_URL` in `src/content.ts` to the production domain (used for the canonical URL and link previews).
+4. Deploy.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Runs anywhere with Node.js 20.9+ (`npm run build` → `npm run start`).
+
+## Accessibility
+
+Semantic landmarks, a skip link, labeled form fields with inline errors, visible focus rings, strong contrast, descriptive image labels, and motion that respects `prefers-reduced-motion`.
+
+## License
+
+Private project. © East End Mandarin.
