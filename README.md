@@ -100,11 +100,16 @@ The site is intentionally type-first — there are no photographs and no image p
 Deploys cleanly to [Vercel](https://vercel.com):
 
 1. Push to GitHub and import the project in Vercel.
-2. Add the `NEXT_PUBLIC_FORM_ACCESS_KEY` environment variable.
+2. In **Project → Settings → Environment Variables**, add the contact-form key:
+   - **Name:** `NEXT_PUBLIC_FORM_ACCESS_KEY` — spelled exactly, including the `NEXT_PUBLIC_` prefix. The form fetches from the browser, so the key must be public; **without the prefix it is `undefined` on the client and the form fails with "Something went wrong."**
+   - **Value:** your Web3Forms access key (a UUID, e.g. `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`).
+   - **Redeploy after setting it.** `NEXT_PUBLIC_` variables are inlined at build time, so the value only takes effect on the next build — adding or changing it without a redeploy has no effect.
 3. Set `SITE_URL` in `src/content.ts` to the production domain (used for the canonical URL and link previews).
 4. Deploy.
 
 Runs anywhere with Node.js 20.9+ (`npm run build` → `npm run start`).
+
+> **Contact form troubleshooting:** if submitting shows "Something went wrong" in production, open the browser console — the form logs the exact cause (a missing `NEXT_PUBLIC_FORM_ACCESS_KEY`, or the actual error message returned by Web3Forms). The usual fix is setting the variable with the `NEXT_PUBLIC_` prefix and redeploying.
 
 ## Accessibility
 

@@ -85,9 +85,11 @@ export function ContactForm() {
     }
 
     if (!accessKey) {
-      // No backend key configured — surface the error UI with a fallback.
-      console.warn(
-        "Contact form: NEXT_PUBLIC_FORM_ACCESS_KEY is not set. Add it to .env.local (see .env.example).",
+      // Most common production cause: the env var is missing or unprefixed.
+      console.error(
+        "[contact] NEXT_PUBLIC_FORM_ACCESS_KEY is not set. In Vercel, add an " +
+          "env var named exactly NEXT_PUBLIC_FORM_ACCESS_KEY (the NEXT_PUBLIC_ " +
+          "prefix is required to expose it to the browser), then redeploy.",
       );
       setStatus("error");
       return;
@@ -112,14 +114,27 @@ export function ContactForm() {
           message: values.message,
         }),
       });
-      const data = (await res.json()) as { success?: boolean };
-      if (data.success) {
+
+      // Web3Forms always replies with JSON: { success: boolean, message: string }.
+      const data = (await res.json().catch(() => null)) as
+        | { success?: boolean; message?: string }
+        | null;
+
+      if (res.ok && data?.success) {
         setStatus("success");
         setValues(EMPTY);
       } else {
+        // Surface Web3Forms' actual error to the console for diagnosis,
+        // while keeping the friendly message in the UI.
+        console.error(
+          `[contact] Web3Forms submission failed (HTTP ${res.status}): ${
+            data?.message ?? "no message returned"
+          }`,
+        );
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      console.error("[contact] Network error submitting to Web3Forms:", err);
       setStatus("error");
     }
   }
