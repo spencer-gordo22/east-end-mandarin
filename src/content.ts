@@ -97,7 +97,9 @@ export const content = {
       "We'll start with a quick conversation so I can learn about the student and see if it's a good fit.",
     secondary:
       "Tell me a little about the learner and what you'd like to achieve, and I'll be in touch to find a time. I usually reply within two business days.",
-    directLabel: "Prefer email?",
+    directLabel: "Or reach me directly",
+    phone: "+1 917-363-5562",
+    wechat: "Spence_22",
     form: {
       nameLabel: "Name",
       namePlaceholder: "Your name",
