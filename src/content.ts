@@ -51,66 +51,43 @@ export const content = {
 
   background: {
     title: "Background",
-    intro:
-      "I remember exactly what it feels like to be a beginner — so I know how to make Mandarin approachable, hands-on, and genuinely fun.",
     // Photo lives at /public/about-photo.jpg. The section renders cleanly
     // whether or not the file is present (no placeholder box).
     photo: {
       src: "/about-photo.jpg",
       alt: "Spencer Gordon, founder of East End Mandarin",
     },
-    pillars: [
-      {
-        label: "Education",
-        body: "Speaking Mandarin since age three, with immersion schooling at Avenues: The World School, where core subjects are taught in the language rather than just studied. I completed AP Chinese as a sophomore and placed out of every remaining course.",
-      },
-      {
-        label: "Experience",
-        body: "Teaching assistant for a high-school Mandarin program, and now a private 1-on-1 tutor working with students across ages and levels.",
-      },
-      {
-        label: "Future",
-        body: "This fall, an immersion term in Beijing — studying the language at its source.",
-      },
+    paragraphs: [
+      "I started learning Mandarin at age three as a native English speaker. I built my fluency by attending Avenues: The World School, where core subjects were taught in Mandarin rather than simply studied. I became so passionate about the language that I completed AP Chinese as a sophomore, placed out of all remaining courses, served as a teaching assistant, and now tutor students one-on-one.",
+      "I remember exactly what it feels like to be a beginner in a language that seems daunting. I know how to make tones and characters approachable instead of overwhelming. My lessons are fun — we use games, real conversation, and lots of encouragement so students stay engaged, gain confidence, and actually look forward to sessions instead of dreading them.",
+      "Whether someone is brand new to Mandarin or already has some background, I meet them where they are and help them build real, usable language skills — the kind that actually stick. The goal is confident speakers who enjoy the process and see clear progress.",
     ],
   },
 
   services: {
     title: "What I teach",
     intro:
-      "Every learner starts somewhere different. Each track is shaped around where you are and where you want to go.",
-    spectrum: {
-      stops: [
-        "First words",
-        "Conversational basics",
-        "School support",
-        "AP Chinese",
-        "Beyond",
-      ],
-      caption: "Wherever a student starts on this line, I can take them further.",
-    },
-    games: {
-      intro:
-        "Lessons are built on games and real conversation — students learn fastest when they're having fun.",
-      items: [
-        {
-          title: "Mandarin Twister",
-          body: "Body parts and directions, out loud.",
-        },
-        {
-          title: "Simon Says",
-          body: "Commands and verbs without realizing it's a drill.",
-        },
-        {
-          title: "Real-world role-play",
-          body: "Ordering food, asking directions, real NYC situations.",
-        },
-        {
-          title: "Word scavenger hunts",
-          body: "Finding characters out in the world.",
-        },
-      ],
-    },
+      "Whatever a student needs — first words, conversational fluency, AP Chinese or HSK prep, school support, or summer review to stay sharp — I shape each track around where they are and where they want to go.",
+    ratesNote: "Inquire for rates",
+    cta: { label: "Inquire", href: "#contact" },
+    items: [
+      {
+        title: "Beginner Foundations",
+        body: "Pinyin, tones, and your first characters, built in an order that actually sticks.",
+      },
+      {
+        title: "Conversational Fluency",
+        body: "Get past textbook sentences. Real vocabulary, natural rhythm, and enough reps to speak without freezing.",
+      },
+      {
+        title: "Exam & Academic Prep",
+        body: "AP Chinese, HSK, and school coursework — targeted practice and honest feedback to stay ahead.",
+      },
+      {
+        title: "Heritage, Continuing & Summer Review",
+        body: "Reconnecting with the language, building on what you already have, or keeping skills sharp with focused review over the summer.",
+      },
+    ],
   },
 
   location: {

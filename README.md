@@ -42,7 +42,7 @@ src/
     opengraph-image.tsx # generated OG image (editorial wordmark)
     twitter-image.tsx
   components/
-    Logo, Nav, Hero, Background, Services, Spectrum, Location,
+    Logo, Nav, Hero, Background, Services, Location,
     Contact, ContactForm, Footer, Section, Reveal, ui
 ```
 
