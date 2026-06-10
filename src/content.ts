@@ -1,8 +1,9 @@
 /**
  * East End Mandarin — site content
  * ---------------------------------
- * Single source of truth for all editable copy, nav items, teaching tracks,
- * and location data. Revise wording here without touching components.
+ * Single source of truth for all editable copy, nav items, the teaching
+ * spectrum, games, and location data. Revise wording here without touching
+ * components.
  *
  * The only value the owner still needs to supply is the Web3Forms key
  * (NEXT_PUBLIC_FORM_ACCESS_KEY in .env.local — see .env.example).
@@ -41,52 +42,87 @@ export const content = {
       "Personalized 1-on-1 tutoring for elementary, middle, and high school students. Real speaking skills, fun games, progress that sticks, and plenty of encouragement. No boring drills — just results and a good time.",
     primaryCta: { label: "Book a session", href: "#contact" },
     secondaryCta: { label: "Read my story", href: "#background" },
-    note: "In person in NYC, Brooklyn & the Hamptons · Online worldwide",
-    // Optional headshot: drop a square/portrait image into /public and set its
-    // path here (e.g. "/spencer.jpg") to replace the 中文 art with a photo.
-    // Leave empty for the editorial 中文 composition — no placeholder is shown.
+    note: "In person all summer long in NYC and the Hamptons · Online worldwide",
+    // Optional hero headshot: drop a square/portrait image into /public and set
+    // its path here. Leave empty for the editorial 中文 composition.
     portraitSrc: "",
     portraitAlt: "Spencer Gordon, founder of East End Mandarin",
   },
 
   background: {
     title: "Background",
-    paragraphs: [
-      "I started learning Mandarin at age three as a native English speaker. I built my fluency by attending Avenues: The World School, where core subjects were taught in Mandarin rather than simply studied. I became so passionate about the language that I completed AP Chinese as a sophomore, placed out of all remaining courses, served as a teaching assistant, and now tutor students one-on-one.",
-      "I remember exactly what it feels like to be a beginner in a language that seems daunting. I know how to make tones and characters approachable instead of overwhelming. My lessons are fun — we use games, real conversation, and lots of encouragement so students stay engaged, gain confidence, and actually look forward to sessions instead of dreading them.",
-      "Whether someone is brand new to Mandarin or already has some background, I meet them where they are and help them build real, usable language skills — the kind that actually stick. The goal is confident speakers who enjoy the process and see clear progress.",
+    intro:
+      "I remember exactly what it feels like to be a beginner — so I know how to make Mandarin approachable, hands-on, and genuinely fun.",
+    // Photo lives at /public/about-photo.jpg. The section renders cleanly
+    // whether or not the file is present (no placeholder box).
+    photo: {
+      src: "/about-photo.jpg",
+      alt: "Spencer Gordon, founder of East End Mandarin",
+    },
+    pillars: [
+      {
+        label: "Education",
+        body: "Speaking Mandarin since age three, with immersion schooling at Avenues: The World School, where core subjects are taught in the language rather than just studied. I completed AP Chinese as a sophomore and placed out of every remaining course.",
+      },
+      {
+        label: "Experience",
+        body: "Teaching assistant for a high-school Mandarin program, and now a private 1-on-1 tutor working with students across ages and levels.",
+      },
+      {
+        label: "Future",
+        body: "This fall, an immersion term in Beijing — studying the language at its source.",
+      },
     ],
-    attribution: "Spencer Gordon · East End Mandarin",
   },
 
   services: {
     title: "What I teach",
     intro:
       "Every learner starts somewhere different. Each track is shaped around where you are and where you want to go.",
-    ratesNote: "Inquire for rates",
-    cta: { label: "Inquire", href: "#contact" },
-    items: [
-      {
-        title: "Beginner Foundations",
-        body: "The essential building blocks: pinyin, tones, and characters taught in a clear, structured way. These are the first steps to becoming fluent, so everything that comes later feels easier and more natural.",
-      },
-      {
-        title: "Conversational Fluency & Real Practice",
-        body: "Learn to form real sentences and handle everyday interactions through role-play, back-and-forth conversation, and speaking practice. In-person sessions in New York City include practice in real spots around the city so it feels natural.",
-      },
-    ],
+    spectrum: {
+      stops: [
+        "First words",
+        "Conversational basics",
+        "School support",
+        "AP Chinese",
+        "Beyond",
+      ],
+      caption: "Wherever a student starts on this line, I can take them further.",
+    },
+    games: {
+      intro:
+        "Lessons are built on games and real conversation — students learn fastest when they're having fun.",
+      items: [
+        {
+          title: "Mandarin Twister",
+          body: "Body parts and directions, out loud.",
+        },
+        {
+          title: "Simon Says",
+          body: "Commands and verbs without realizing it's a drill.",
+        },
+        {
+          title: "Real-world role-play",
+          body: "Ordering food, asking directions, real NYC situations.",
+        },
+        {
+          title: "Word scavenger hunts",
+          body: "Finding characters out in the world.",
+        },
+      ],
+    },
   },
 
   location: {
     title: "Where we meet",
     modes: [
       {
-        title: "In person in NYC, Brooklyn & the Hamptons",
-        body: "In-person sessions in Manhattan, Brooklyn, and the Hamptons. This summer I'm focused on in-person lessons that combine structured learning with real-world practice around the city and the East End.",
+        title: "In person (NYC & the Hamptons)",
+        body: "All summer long — lessons around the city and the East End that mix structured learning with real-world practice.",
       },
       {
-        title: "Online sessions",
-        body: "Live one-on-one video lessons with the same fun, effective approach. Whichever works better for your family.",
+        title: "Online",
+        body: "Live one-on-one video lessons, same fun and same results, from anywhere.",
       },
     ],
   },
@@ -132,7 +168,7 @@ export const content = {
 
   footer: {
     tagline:
-      "Mandarin tutoring for kids and teens — in person in NYC, Brooklyn & the Hamptons, and online.",
+      "Mandarin tutoring for kids and teens — in person in NYC and the Hamptons, and online.",
     socials: [] as { label: string; href: string }[],
   },
 
@@ -140,14 +176,13 @@ export const content = {
     title: `${BRAND} — Mandarin Tutoring for Kids & Teens`,
     titleTemplate: `%s · ${BRAND}`,
     description:
-      "Personalized 1-on-1 Mandarin tutoring for elementary, middle, and high school students. Real speaking skills, fun games, and encouragement — in person in NYC, Brooklyn & the Hamptons, and online.",
+      "Personalized 1-on-1 Mandarin tutoring for elementary, middle, and high school students. Real speaking skills, fun games, and encouragement — in person in NYC and the Hamptons, and online.",
     keywords: [
       "Mandarin tutor for kids",
       "Mandarin tutoring teens",
       "Chinese lessons for kids",
       "AP Chinese",
       "NYC Mandarin tutor",
-      "Brooklyn Mandarin tutor",
       "Hamptons Mandarin tutor",
       "online Mandarin lessons",
       "Spencer Gordon",

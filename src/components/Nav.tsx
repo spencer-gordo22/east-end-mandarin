@@ -48,7 +48,7 @@ export function Nav() {
           aria-label={`${home.label} — home`}
           className="text-charcoal transition-colors hover:text-jade"
         >
-          <Logo variant="compact" className="text-[0.95rem]" />
+          <Logo variant="wordmark" className="text-[0.95rem]" />
         </a>
 
         {/* Desktop links */}
@@ -81,7 +81,7 @@ export function Nav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="-mr-2 inline-flex h-10 w-10 items-center justify-center rounded-full text-charcoal transition duration-150 ease-out hover:bg-charcoal/5 active:scale-90 md:hidden"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-charcoal transition duration-150 ease-out hover:bg-charcoal/5 active:scale-90 md:hidden"
         >
           {open ? (
             <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">

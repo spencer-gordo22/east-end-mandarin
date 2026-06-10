@@ -1,6 +1,7 @@
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeader, ArrowLink } from "@/components/ui";
+import { SectionHeader } from "@/components/ui";
+import { Spectrum } from "@/components/Spectrum";
 import { content } from "@/content";
 
 export function Services() {
@@ -10,27 +11,34 @@ export function Services() {
     <Section id="services" tone="cream">
       <SectionHeader title={services.title} intro={services.intro} />
 
-      <div className="mt-12 grid grid-cols-1 gap-5 sm:mt-16 sm:gap-6 md:grid-cols-2">
-        {services.items.map((item, i) => (
-          <Reveal key={item.title} delay={i * 0.07}>
-            <article className="flex h-full flex-col rounded-2xl border border-line bg-white p-8 transition duration-200 ease-out hover:-translate-y-1 hover:border-jade/30 hover:shadow-lg">
-              <h3 className="font-serif text-2xl leading-snug tracking-tight text-charcoal">
-                {item.title}
-              </h3>
-              <p className="mt-3 flex-1 text-pretty leading-relaxed text-charcoal-soft">
-                {item.body}
-              </p>
-              <div className="mt-7 flex items-center justify-between border-t border-line pt-5">
-                <span className="text-sm font-medium text-charcoal-soft">
-                  {services.ratesNote}
-                </span>
-                <ArrowLink href={services.cta.href} className="text-sm">
-                  {services.cta.label}
-                </ArrowLink>
+      <div className="mt-12 sm:mt-16">
+        <Spectrum
+          stops={services.spectrum.stops}
+          caption={services.spectrum.caption}
+        />
+      </div>
+
+      {/* How we play */}
+      <div className="mt-16 border-t border-line pt-12 sm:mt-20 sm:pt-14">
+        <Reveal>
+          <p className="max-w-2xl text-pretty text-lg leading-relaxed text-charcoal-soft">
+            {services.games.intro}
+          </p>
+        </Reveal>
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {services.games.items.map((game, i) => (
+            <Reveal key={game.title} delay={i * 0.06}>
+              <div className="h-full rounded-xl border border-line bg-white p-5 transition-colors duration-200 ease-out hover:border-jade/30">
+                <h3 className="font-serif text-lg leading-snug tracking-tight text-charcoal">
+                  {game.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-charcoal-soft">
+                  {game.body}
+                </p>
               </div>
-            </article>
-          </Reveal>
-        ))}
+            </Reveal>
+          ))}
+        </div>
       </div>
     </Section>
   );

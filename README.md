@@ -24,7 +24,7 @@ A warm, single-page experience for students and parents: an editorial wordmark l
 
 - **Palette:** cream `#F7F4ED` background, charcoal `#2A2A28` text, refined jade `#2E6B52` accent (used sparingly), warm sand `#EFEAE0` alternate surface, white cards.
 - **Type:** Fraunces for headings, Inter for body/UI, on a deliberate scale with generous line-height.
-- **Logo:** an "editorial wordmark" built in [`src/components/Logo.tsx`](src/components/Logo.tsx) — "EAST END / MANDARIN" in tracked Cormorant Garamond caps, a jade 文 (Noto Serif SC) between hairline rules, and a "Mandarin Tutoring" tagline. Stacked, compact (nav), and icon (jade 文 in a hairline circle → favicon) variants.
+- **Logo:** an "editorial wordmark" built in [`src/components/Logo.tsx`](src/components/Logo.tsx) — a small jade 文 (Noto Serif SC) + "East End Mandarin" in tracked Cormorant Garamond caps. `wordmark` (nav + footer) and `icon` (jade 文 in a hairline circle → favicon) variants.
 - **Motion (per [Emil Kowalski's](https://animations.dev) principles):** ~240ms scroll reveals, a strong custom `ease-out`, refined hover/press states, and full `prefers-reduced-motion` support.
 
 ---
@@ -42,7 +42,7 @@ src/
     opengraph-image.tsx # generated OG image (editorial wordmark)
     twitter-image.tsx
   components/
-    Logo, Nav, Hero, Background, Services, Location,
+    Logo, Nav, Hero, Background, Services, Spectrum, Location,
     Contact, ContactForm, Footer, Section, Reveal, ui
 ```
 

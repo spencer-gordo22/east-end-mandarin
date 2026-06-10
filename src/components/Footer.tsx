@@ -16,7 +16,7 @@ export function Footer() {
               aria-label={`${brand.name} — home`}
               className="inline-block"
             >
-              <Logo variant="stacked" tone="light" />
+              <Logo variant="wordmark" tone="light" className="text-lg" />
             </a>
             <p className="mt-6 text-pretty leading-relaxed text-cream/65">
               {footer.tagline}
