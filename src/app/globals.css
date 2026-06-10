@@ -31,10 +31,11 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
     serif;
-  /* Logo-only: editorial wordmark + the 文 mark (with CJK serif fallbacks). */
+  /* Logo-only: editorial wordmark + the 文 mark. The 文 renders from system
+     CJK serif fonts — latin webfont subsets never include the glyph, so
+     loading one would be dead weight. */
   --font-cormorant: var(--font-cormorant-garamond), ui-serif, Georgia, serif;
-  --font-noto: var(--font-noto-serif-sc), "Noto Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
+  --font-noto: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
 }
 
 /* Strong custom easing — the built-in CSS curves are too weak. Overriding the

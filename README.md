@@ -13,7 +13,7 @@ A warm, single-page experience for students and parents: an editorial wordmark l
 | Framework | [Next.js 16](https://nextjs.org) (App Router)                          |
 | Language  | TypeScript                                                             |
 | Styling   | [Tailwind CSS v4](https://tailwindcss.com)                             |
-| Fonts     | [Fraunces](https://fonts.google.com/specimen/Fraunces) + [Inter](https://fonts.google.com/specimen/Inter); [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) + [Noto Serif SC](https://fonts.google.com/noto/specimen/Noto+Serif+SC) for the logo — all via `next/font` |
+| Fonts     | [Fraunces](https://fonts.google.com/specimen/Fraunces) + [Inter](https://fonts.google.com/specimen/Inter); [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) for the logo wordmark — all via `next/font` (the logo's 文 mark uses the system CJK serif stack; no extra webfont) |
 | Motion    | [Framer Motion](https://www.framer.com/motion/)                        |
 | Forms     | [Web3Forms](https://web3forms.com) (no backend)                        |
 | Tooling   | ESLint (flat config), Turbopack                                        |
@@ -24,7 +24,7 @@ A warm, single-page experience for students and parents: an editorial wordmark l
 
 - **Palette:** cream `#F7F4ED` background, charcoal `#2A2A28` text, refined jade `#2E6B52` accent (used sparingly), warm sand `#EFEAE0` alternate surface, white cards.
 - **Type:** Fraunces for headings, Inter for body/UI, on a deliberate scale with generous line-height.
-- **Logo:** an "editorial wordmark" built in [`src/components/Logo.tsx`](src/components/Logo.tsx) — a small jade 文 (Noto Serif SC) + "East End Mandarin" in tracked Cormorant Garamond caps. `wordmark` (nav + footer) and `icon` (jade 文 in a hairline circle → favicon) variants.
+- **Logo:** an "editorial wordmark" built in [`src/components/Logo.tsx`](src/components/Logo.tsx) — a small jade 文 + "East End Mandarin" in tracked Cormorant Garamond caps. `wordmark` (nav + footer) and `icon` (jade 文 in a hairline circle → favicon) variants.
 - **Motion (per [Emil Kowalski's](https://animations.dev) principles):** ~240ms scroll reveals, a strong custom `ease-out`, refined hover/press states, and full `prefers-reduced-motion` support.
 
 ---
@@ -93,7 +93,7 @@ Open **[http://localhost:3000](http://localhost:3000)**.
 
 ## Design: no photography
 
-The site is intentionally type-first — the hero is a full-width headline with no imagery, and there are no placeholder boxes anywhere. The one photo slot is the About section: drop a portrait at `public/about-photo.jpg` and rebuild, and it appears beside the Background text (the section renders cleanly without it).
+The site is intentionally type-first — the hero is a full-width headline with no imagery, and there are no placeholder boxes anywhere. The one photo is the About headshot (`public/about-photo.jpg`, rendered with `next/image`); if the file is removed, the section automatically falls back to a clean single-column layout.
 
 ## Deployment
 

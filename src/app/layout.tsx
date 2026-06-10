@@ -1,10 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Fraunces,
-  Inter,
-  Cormorant_Garamond,
-  Noto_Serif_SC,
-} from "next/font/google";
+import { Fraunces, Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -22,17 +17,13 @@ const inter = Inter({
   display: "swap",
 });
 
-// Logo: editorial wordmark (Cormorant Garamond) + the 文 mark (Noto Serif SC).
+// Logo wordmark: Cormorant Garamond tracked caps. The 文 mark renders from
+// the system CJK serif stack (see --font-noto in globals.css) — a webfont
+// would be pure dead weight, since latin subsets don't include the glyph.
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: "500",
   variable: "--font-cormorant-garamond",
-  display: "swap",
-});
-const notoSerifSC = Noto_Serif_SC({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-noto-serif-sc",
   display: "swap",
 });
 
@@ -78,7 +69,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${fraunces.variable} ${inter.variable} ${cormorant.variable} ${notoSerifSC.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-charcoal">
         {/* Ensure scroll-reveal content is visible without JavaScript */}
