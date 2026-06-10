@@ -9,19 +9,19 @@ type FormValues = {
   name: string;
   email: string;
   level: string;
-  times: string;
+  times: string[];
   message: string;
   botcheck: string; // honeypot — should stay empty
 };
 
-type FormErrors = Partial<Record<keyof FormValues, string>>;
+type FormErrors = Partial<Record<"name" | "email" | "level" | "message", string>>;
 type Status = "idle" | "submitting" | "success" | "error";
 
 const EMPTY: FormValues = {
   name: "",
   email: "",
   level: "",
-  times: "",
+  times: [],
   message: "",
   botcheck: "",
 };
@@ -43,6 +43,10 @@ const labelClass = "block text-sm font-medium text-charcoal";
 const controlBase =
   "mt-2 w-full rounded-xl border bg-white px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-soft/50 focus:border-jade";
 
+// Tap-friendly selectable chip; the real input is visually hidden inside.
+const chipClass =
+  "cursor-pointer select-none rounded-full border border-line-strong bg-white px-4 py-2.5 text-sm font-medium text-charcoal transition duration-150 ease-out hover:border-jade active:scale-[0.97] has-[:checked]:border-jade has-[:checked]:bg-jade has-[:checked]:text-white has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-jade";
+
 function borderFor(error?: string) {
   return error ? "border-red-400" : "border-line-strong";
 }
@@ -54,19 +58,35 @@ export function ContactForm() {
 
   const accessKey = process.env.NEXT_PUBLIC_FORM_ACCESS_KEY;
 
-  function handleChange(
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  ) {
-    const { name, value } = e.target;
-    setValues((prev) => ({ ...prev, [name]: value }));
-    // Clear a field's error as the user corrects it.
+  function clearError(key: keyof FormErrors) {
     setErrors((prev) => {
-      const key = name as keyof FormValues;
       if (!prev[key]) return prev;
       const next = { ...prev };
       delete next[key];
       return next;
     });
+  }
+
+  function handleChange(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    const { name, value } = e.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
+    clearError(name as keyof FormErrors);
+  }
+
+  function selectLevel(option: string) {
+    setValues((prev) => ({ ...prev, level: option }));
+    clearError("level");
+  }
+
+  function toggleTime(option: string) {
+    setValues((prev) => ({
+      ...prev,
+      times: prev.times.includes(option)
+        ? prev.times.filter((t) => t !== option)
+        : [...prev.times, option],
+    }));
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -110,7 +130,9 @@ export function ContactForm() {
           name: values.name,
           email: values.email,
           "Learner level": values.level,
-          "Preferred times": values.times || "Not specified",
+          "Preferred times": values.times.length
+            ? values.times.join(", ")
+            : "Not specified",
           message: values.message,
         }),
       });
@@ -259,55 +281,55 @@ export function ContactForm() {
             </p>
           ) : null}
         </div>
-
-        {/* Learner level */}
-        <div>
-          <label htmlFor="level" className={labelClass}>
-            {f.levelLabel}
-          </label>
-          <select
-            id="level"
-            name="level"
-            value={values.level}
-            onChange={handleChange}
-            aria-invalid={errors.level ? true : undefined}
-            aria-describedby={errors.level ? "level-error" : undefined}
-            className={`${controlBase} ${borderFor(errors.level)} ${
-              values.level ? "text-charcoal" : "text-charcoal-soft/60"
-            }`}
-          >
-            <option value="" disabled>
-              {f.levelPlaceholder}
-            </option>
-            {f.levelOptions.map((option) => (
-              <option key={option} value={option} className="text-charcoal">
-                {option}
-              </option>
-            ))}
-          </select>
-          {errors.level ? (
-            <p id="level-error" className="mt-1.5 text-sm text-red-700">
-              {errors.level}
-            </p>
-          ) : null}
-        </div>
-
-        {/* Preferred times */}
-        <div>
-          <label htmlFor="times" className={labelClass}>
-            {f.timesLabel}
-          </label>
-          <input
-            id="times"
-            name="times"
-            type="text"
-            value={values.times}
-            onChange={handleChange}
-            placeholder={f.timesPlaceholder}
-            className={`${controlBase} ${borderFor()}`}
-          />
-        </div>
       </div>
+
+      {/* Learner level — single-select chips */}
+      <fieldset
+        className="mt-5"
+        aria-describedby={errors.level ? "level-error" : undefined}
+      >
+        <legend className={labelClass}>{f.levelLabel}</legend>
+        <div className="mt-2.5 flex flex-wrap gap-2">
+          {f.levelOptions.map((option) => (
+            <label key={option} className={chipClass}>
+              <input
+                type="radio"
+                name="level"
+                value={option}
+                checked={values.level === option}
+                onChange={() => selectLevel(option)}
+                className="sr-only"
+              />
+              {option}
+            </label>
+          ))}
+        </div>
+        {errors.level ? (
+          <p id="level-error" className="mt-2 text-sm text-red-700">
+            {errors.level}
+          </p>
+        ) : null}
+      </fieldset>
+
+      {/* Preferred times — multi-select chips (optional) */}
+      <fieldset className="mt-5">
+        <legend className={labelClass}>{f.timesLabel}</legend>
+        <div className="mt-2.5 flex flex-wrap gap-2">
+          {f.timesOptions.map((option) => (
+            <label key={option} className={chipClass}>
+              <input
+                type="checkbox"
+                name="times"
+                value={option}
+                checked={values.times.includes(option)}
+                onChange={() => toggleTime(option)}
+                className="sr-only"
+              />
+              {option}
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       {/* Message */}
       <div className="mt-5">

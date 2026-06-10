@@ -93,7 +93,7 @@ Open **[http://localhost:3000](http://localhost:3000)**.
 
 ## Design: no photography
 
-The site is intentionally type-first — there are no photographs and no image placeholders. Where a photo might sit (the hero), the design uses an oversized, low-contrast 中文 composition on a warm sand panel, echoing the logo — nothing looks unfinished. To add a real headshot later, drop a square/portrait image in `public/` and set `hero.portraitSrc` in `src/content.ts`; it replaces the 中文 art with no other changes.
+The site is intentionally type-first — the hero is a full-width headline with no imagery, and there are no placeholder boxes anywhere. The one photo slot is the About section: drop a portrait at `public/about-photo.jpg` and rebuild, and it appears beside the Background text (the section renders cleanly without it).
 
 ## Deployment
 

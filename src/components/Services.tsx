@@ -20,7 +20,7 @@ export function Services() {
               <p className="mt-3 flex-1 text-pretty leading-relaxed text-charcoal-soft">
                 {item.body}
               </p>
-              <div className="mt-7 flex items-center justify-between border-t border-line pt-5">
+              <div className="mt-7 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-line pt-5">
                 <span className="text-sm font-medium text-charcoal-soft">
                   {services.ratesNote}
                 </span>

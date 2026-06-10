@@ -43,10 +43,6 @@ export const content = {
     primaryCta: { label: "Book a session", href: "#contact" },
     secondaryCta: { label: "Read my story", href: "#background" },
     note: "In person all summer long in NYC and the Hamptons · Online worldwide",
-    // Optional hero headshot: drop a square/portrait image into /public and set
-    // its path here. Leave empty for the editorial 中文 composition.
-    portraitSrc: "",
-    portraitAlt: "Spencer Gordon, founder of East End Mandarin",
   },
 
   background: {
@@ -68,7 +64,7 @@ export const content = {
     title: "What I teach",
     intro:
       "Whatever a student needs — first words, conversational fluency, AP Chinese or HSK prep, school support, or summer review to stay sharp — I shape each track around where they are and where they want to go.",
-    ratesNote: "Inquire for rates",
+    ratesNote: "Custom pricing — Let's discuss your goals",
     cta: { label: "Inquire", href: "#contact" },
     items: [
       {
@@ -128,7 +124,7 @@ export const content = {
         "Exam prep",
       ],
       timesLabel: "Preferred times",
-      timesPlaceholder: "e.g. weekday afternoons, Sunday mornings",
+      timesOptions: ["Weekday afternoons", "Weekends", "Mornings"],
       messageLabel: "Message",
       messagePlaceholder:
         "Who is the learner, and what are you hoping to achieve?",
