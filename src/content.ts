@@ -61,29 +61,63 @@ export const content = {
   },
 
   services: {
-    title: "What I teach",
-    intro:
-      "Whatever a student needs — first words, conversational fluency, AP Chinese or HSK prep, school support, or summer review to stay sharp — I shape each track around where they are and where they want to go.",
-    ratesNote: "Custom pricing — Let's discuss your goals",
-    cta: { label: "Inquire", href: "#contact" },
-    items: [
+    title: "Services",
+    // The spectrum: a single line a student lands somewhere on, then moves along.
+    spectrum: {
+      stops: [
+        "First words",
+        "Classroom support",
+        "Real fluency",
+        "AP / HSK mastery",
+      ],
+      note: "Wherever a student is on this line, lessons start there — and keep going.",
+    },
+    // Two tracks. No pricing, no per-card CTA — the single banner below carries it.
+    tracks: [
       {
-        title: "Beginner Foundations",
-        body: "Pinyin, tones, and your first characters, built in an order that actually sticks.",
+        title: "Confidence & Fluency",
+        bestFor: "Beginners, heritage speakers, and summer review.",
+        vibe: "Moving past rigid textbook drills to build a genuine love for the language.",
+        focus: [
+          {
+            lead: "Overcoming the freeze",
+            body: "demystifying tones and pinyin through high-energy, interactive practice and games.",
+          },
+          {
+            lead: "Real-world rhythm",
+            body: "natural speed, real conversation, and cultural context instead of formal scripts.",
+          },
+          {
+            lead: "Heritage reconnection",
+            body: "rebuilding the language through topics students actually care about: pop culture, gaming, sports.",
+          },
+        ],
       },
       {
-        title: "Conversational Fluency",
-        body: "Get past textbook sentences. Real vocabulary, natural rhythm, and enough reps to speak without freezing.",
-      },
-      {
-        title: "Exam & Academic Prep",
-        body: "AP Chinese, HSK, and school coursework — targeted practice and honest feedback to stay ahead.",
-      },
-      {
-        title: "Heritage, Continuing & Summer Review",
-        body: "Reconnecting with the language, building on what you already have, or keeping skills sharp with focused review over the summer.",
+        title: "Academic Strategy & Results",
+        bestFor: "AP/HSK students and classroom grade boosting.",
+        vibe: "High-efficiency, strategic prep for the big academic checkpoints.",
+        focus: [
+          {
+            lead: "Exam-tested strategies",
+            body: "the exact methods I used to take on AP Chinese as a sophomore and place out of every remaining course.",
+          },
+          {
+            lead: "Curriculum alignment",
+            body: "patching classroom grammar gaps and building academic stamina.",
+          },
+          {
+            lead: "The TA advantage",
+            body: "feedback from a former teaching assistant who knows exactly what teachers look for.",
+          },
+        ],
       },
     ],
+    banner: {
+      headline: "No pre-packaged syllabus. No rigid templates.",
+      body: "Every student's brain works differently, so every curriculum is custom-built from scratch. Let's map out a personalized roadmap that fits your goals and schedule.",
+      cta: { label: "Inquire about a custom track", href: "#contact" },
+    },
   },
 
   location: {
