@@ -1,7 +1,7 @@
 /**
  * East End Mandarin — site content
  * ---------------------------------
- * Single source of truth for all editable copy, nav items, the teaching
+ * Single source of truth for all editable copy, nav items, the services
  * spectrum, games, and location data. Revise wording here without touching
  * components.
  *
@@ -28,7 +28,7 @@ export const content = {
     home: { label: BRAND, href: "#top" },
     links: [
       { label: "About", href: "#background" },
-      { label: "Teaching", href: "#services" },
+      { label: "Services", href: "#services" },
       { label: "Location", href: "#location" },
       { label: "Contact", href: "#contact" },
     ],
