@@ -1,9 +1,8 @@
 /**
  * East End Mandarin — site content
  * ---------------------------------
- * Single source of truth for all editable copy, nav items, the services
- * spectrum, games, and location data. Revise wording here without touching
- * components.
+ * Single source of truth for all editable copy — nav, hero, services, and
+ * the contact form. Revise wording here without touching components.
  *
  * The only value the owner still needs to supply is the Web3Forms key
  * (NEXT_PUBLIC_FORM_ACCESS_KEY in .env.local — see .env.example).
@@ -29,7 +28,6 @@ export const content = {
     links: [
       { label: "About", href: "#background" },
       { label: "Services", href: "#services" },
-      { label: "Location", href: "#location" },
       { label: "Contact", href: "#contact" },
     ],
     cta: { label: "Book a session", href: "#contact" },
@@ -42,7 +40,11 @@ export const content = {
       "Personalized 1-on-1 tutoring for elementary, middle, and high school students. Real speaking skills, fun games, progress that sticks, and plenty of encouragement. No boring drills — just results and a good time.",
     primaryCta: { label: "Book a session", href: "#contact" },
     secondaryCta: { label: "Read my story", href: "#background" },
-    note: "In person all summer long in NYC and the Hamptons · Online worldwide",
+    // Two ways to meet — surfaced here now that there's no separate location section.
+    locations: [
+      { label: "In person", detail: "NYC & the Hamptons, seasonally" },
+      { label: "Online", detail: "anytime, worldwide" },
+    ],
   },
 
   background: {
@@ -120,20 +122,6 @@ export const content = {
     },
   },
 
-  location: {
-    title: "Where we meet",
-    modes: [
-      {
-        title: "In person (NYC & the Hamptons)",
-        body: "All summer long — lessons around the city and the East End that mix structured learning with real-world practice.",
-      },
-      {
-        title: "Online",
-        body: "Live one-on-one video lessons, same fun and same results, from anywhere.",
-      },
-    ],
-  },
-
   contact: {
     title: "Book a session",
     intro:
@@ -157,6 +145,8 @@ export const content = {
         "Advanced or heritage",
         "Exam prep",
       ],
+      locationLabel: "Where we'll meet",
+      locationOptions: ["In person (seasonally)", "Online (anytime)"],
       timesLabel: "Preferred times",
       timesOptions: ["Weekday afternoons", "Weekends", "Mornings"],
       messageLabel: "Message",

@@ -9,6 +9,7 @@ type FormValues = {
   name: string;
   email: string;
   level: string;
+  location: string[];
   times: string[];
   message: string;
   botcheck: string; // honeypot — should stay empty
@@ -21,6 +22,7 @@ const EMPTY: FormValues = {
   name: "",
   email: "",
   level: "",
+  location: [],
   times: [],
   message: "",
   botcheck: "",
@@ -89,6 +91,15 @@ export function ContactForm() {
     }));
   }
 
+  function toggleLocation(option: string) {
+    setValues((prev) => ({
+      ...prev,
+      location: prev.location.includes(option)
+        ? prev.location.filter((l) => l !== option)
+        : [...prev.location, option],
+    }));
+  }
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -130,6 +141,9 @@ export function ContactForm() {
           name: values.name,
           email: values.email,
           "Learner level": values.level,
+          "Where we'll meet": values.location.length
+            ? values.location.join(", ")
+            : "Not specified",
           "Preferred times": values.times.length
             ? values.times.join(", ")
             : "Not specified",
@@ -309,6 +323,26 @@ export function ContactForm() {
             {errors.level}
           </p>
         ) : null}
+      </fieldset>
+
+      {/* Where we'll meet — multi-select chips (optional) */}
+      <fieldset className="mt-5">
+        <legend className={labelClass}>{f.locationLabel}</legend>
+        <div className="mt-2.5 flex flex-wrap gap-2">
+          {f.locationOptions.map((option) => (
+            <label key={option} className={chipClass}>
+              <input
+                type="checkbox"
+                name="location"
+                value={option}
+                checked={values.location.includes(option)}
+                onChange={() => toggleLocation(option)}
+                className="sr-only"
+              />
+              {option}
+            </label>
+          ))}
+        </div>
       </fieldset>
 
       {/* Preferred times — multi-select chips (optional) */}

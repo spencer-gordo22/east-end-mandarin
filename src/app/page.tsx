@@ -1,7 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { Background } from "@/components/Background";
 import { Services } from "@/components/Services";
-import { Location } from "@/components/Location";
 import { Contact } from "@/components/Contact";
 import { content, CONTACT_EMAIL, SITE_URL } from "@/content";
 
@@ -33,7 +32,6 @@ export default function Home() {
       <Hero />
       <Background />
       <Services />
-      <Location />
       <Contact />
     </>
   );
