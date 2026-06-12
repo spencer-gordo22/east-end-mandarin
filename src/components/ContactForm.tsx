@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ChangeEvent, type FormEvent } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { content, CONTACT_EMAIL } from "@/content";
 
 const f = content.contact.form;
@@ -9,7 +10,8 @@ type FormValues = {
   name: string;
   email: string;
   level: string;
-  location: string[];
+  meet: string[];
+  located: string;
   times: string[];
   message: string;
   botcheck: string; // honeypot — should stay empty
@@ -22,7 +24,8 @@ const EMPTY: FormValues = {
   name: "",
   email: "",
   level: "",
-  location: [],
+  meet: [],
+  located: "",
   times: [],
   message: "",
   botcheck: "",
@@ -57,6 +60,7 @@ export function ContactForm() {
   const [values, setValues] = useState<FormValues>(EMPTY);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<Status>("idle");
+  const prefersReduced = useReducedMotion();
 
   const accessKey = process.env.NEXT_PUBLIC_FORM_ACCESS_KEY;
 
@@ -91,12 +95,12 @@ export function ContactForm() {
     }));
   }
 
-  function toggleLocation(option: string) {
+  function toggleMeet(option: string) {
     setValues((prev) => ({
       ...prev,
-      location: prev.location.includes(option)
-        ? prev.location.filter((l) => l !== option)
-        : [...prev.location, option],
+      meet: prev.meet.includes(option)
+        ? prev.meet.filter((m) => m !== option)
+        : [...prev.meet, option],
     }));
   }
 
@@ -141,9 +145,12 @@ export function ContactForm() {
           name: values.name,
           email: values.email,
           "Learner level": values.level,
-          "Where we'll meet": values.location.length
-            ? values.location.join(", ")
+          "How would you like to meet": values.meet.length
+            ? values.meet.join(", ")
             : "Not specified",
+          ...(values.meet.includes("In person") && values.located.trim()
+            ? { "Where are you located": values.located.trim() }
+            : {}),
           "Preferred times": values.times.length
             ? values.times.join(", ")
             : "Not specified",
@@ -325,24 +332,54 @@ export function ContactForm() {
         ) : null}
       </fieldset>
 
-      {/* Where we'll meet — multi-select chips (optional) */}
+      {/* How would you like to meet? — multi-select chips, with a
+          conditional location field shown only when meeting in person */}
       <fieldset className="mt-5">
-        <legend className={labelClass}>{f.locationLabel}</legend>
+        <legend className={labelClass}>{f.meetLabel}</legend>
         <div className="mt-2.5 flex flex-wrap gap-2">
-          {f.locationOptions.map((option) => (
+          {f.meetOptions.map((option) => (
             <label key={option} className={chipClass}>
               <input
                 type="checkbox"
-                name="location"
+                name="meet"
                 value={option}
-                checked={values.location.includes(option)}
-                onChange={() => toggleLocation(option)}
+                checked={values.meet.includes(option)}
+                onChange={() => toggleMeet(option)}
                 className="sr-only"
               />
               {option}
             </label>
           ))}
         </div>
+
+        <AnimatePresence initial={false}>
+          {values.meet.includes("In person") ? (
+            <motion.div
+              key="located"
+              initial={prefersReduced ? false : { opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={prefersReduced ? { opacity: 0 } : { opacity: 0, height: 0 }}
+              transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="pt-4">
+                <label htmlFor="located" className={labelClass}>
+                  {f.locatedLabel}
+                </label>
+                <input
+                  id="located"
+                  name="located"
+                  type="text"
+                  autoComplete="address-level2"
+                  value={values.located}
+                  onChange={handleChange}
+                  placeholder={f.locatedPlaceholder}
+                  className={`${controlBase} border-line-strong`}
+                />
+              </div>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </fieldset>
 
       {/* Preferred times — multi-select chips (optional) */}
